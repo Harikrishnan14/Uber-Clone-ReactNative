@@ -1,23 +1,27 @@
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { Icon } from 'react-native-elements'
+import { useRouter } from 'expo-router'
 
 const data = [
     {
         id: "123",
         title: "Get a ride",
         image: "https://links.papareact.com/3pn",
-        screen: "MapScreen"
+        screen: "map"
     },
     {
         id: "456",
         title: "Order food",
         image: "https://links.papareact.com/28w",
-        screen: "EatsScreen"
+        screen: "eats"
     },
 ]
 
 const NavOptions = () => {
+
+    const router = useRouter()
+
     return (
         <FlatList
             data={data}
@@ -26,6 +30,7 @@ const NavOptions = () => {
             renderItem={({ item }) => (
                 <TouchableOpacity
                     className='p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40'
+                    onPress={() => router.push(`/${item.screen}`)}
                 >
                     <View>
                         <Image
