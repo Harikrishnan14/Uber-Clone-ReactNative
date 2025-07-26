@@ -2,6 +2,8 @@ import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react
 import React from 'react'
 import { Icon } from 'react-native-elements'
 import { useRouter } from 'expo-router'
+import { useSelector } from 'react-redux'
+import { selectOrigin } from '@/redux/slices/navSlice'
 
 const data = [
     {
@@ -21,6 +23,7 @@ const data = [
 const NavOptions = () => {
 
     const router = useRouter()
+    const origin = useSelector(selectOrigin)
 
     return (
         <FlatList
@@ -31,8 +34,9 @@ const NavOptions = () => {
                 <TouchableOpacity
                     className='p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40'
                     onPress={() => router.push(`/${item.screen}`)}
+                    disabled={!origin}
                 >
-                    <View>
+                    <View className={!origin && 'opacity-20'}>
                         <Image
                             style={{
                                 width: 100,

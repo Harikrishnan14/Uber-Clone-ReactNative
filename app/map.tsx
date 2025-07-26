@@ -1,5 +1,5 @@
-import React from 'react'
 import MapScreen from '@/screens/MapScreen'
+import React from 'react'
 
 const Map = () => {
     return <MapScreen />
