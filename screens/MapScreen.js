@@ -1,14 +1,36 @@
 import MapViewComponent from '@/components/MapViewComponent'
+import NavigateCard from '@/components/NavigateCard'
+import RideOptionsCard from '@/components/RideOptionsCard'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 const MapScreen = () => {
+
+    const Stack = createNativeStackNavigator()
+
     return (
         <View>
-            <View className='h-1/2'>
+            <View className='h-1/2 bg-red-600'>
                 <MapViewComponent />
             </View>
             <View className='h-1/2'>
+                <Stack.Navigator>
+                    <Stack.Screen
+                        name="NavigateCard"
+                        component={NavigateCard}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                    <Stack.Screen
+                        name="RideOptionsCard"
+                        component={RideOptionsCard}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
+                </Stack.Navigator>
             </View>
         </View>
     )

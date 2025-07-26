@@ -1,8 +1,8 @@
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
-import NavOptions from '@/components/NavOptions'
+import NavOptions from '@/components/NavOptions';
+import { setDestination, setOrigin } from '@/redux/slices/navSlice';
+import { Image, SafeAreaView, StyleSheet, View } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useDispatch } from 'react-redux';
-import { setDestination, setOrigin } from '@/redux/slices/navSlice';
 
 const HomeScreen = () => {
     const dispatch = useDispatch()
@@ -44,7 +44,7 @@ const HomeScreen = () => {
                         dispatch(setDestination(null))
                     }}
                     fetchDetails={true}
-                    returnKeyType={"Search"}
+                    returnKeyType={"search"}
                     enablePoweredByContainer={false}
                     minLength={2}
                     query={{
