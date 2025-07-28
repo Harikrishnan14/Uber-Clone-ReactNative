@@ -1,3 +1,4 @@
+import NavFavourites from '@/components/NavFavourites';
 import NavOptions from '@/components/NavOptions';
 import { setDestination, setOrigin } from '@/redux/slices/navSlice';
 import { Image, SafeAreaView, StyleSheet, View } from 'react-native';
@@ -56,6 +57,7 @@ const HomeScreen = () => {
                 />
 
                 <NavOptions />
+                <NavFavourites />
             </View>
         </SafeAreaView>
     )

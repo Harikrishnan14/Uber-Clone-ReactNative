@@ -2,6 +2,7 @@ import { setDestination } from '@/redux/slices/navSlice'
 import { useNavigation } from 'expo-router'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import NavFavourites from './NavFavourites'
 
 const NavigateCard = () => {
 
@@ -38,6 +39,9 @@ const NavigateCard = () => {
                         debounce={400}
                     />
                 </View>
+
+                <NavFavourites />
+
             </View>
         </View>
     )
