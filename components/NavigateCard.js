@@ -1,8 +1,9 @@
 import { setDestination } from '@/redux/slices/navSlice'
 import { useNavigation } from 'expo-router'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import NavFavourites from './NavFavourites'
+import { Icon } from 'react-native-elements'
 
 const NavigateCard = () => {
 
@@ -42,6 +43,30 @@ const NavigateCard = () => {
 
                 <NavFavourites />
 
+            </View>
+
+            <View className='flex-row bg-white justify-evenly py-2 mt-auto border-t border-gray-100'>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("RideOptionsCard")}
+                    className='flex flex-row justify-between bg-black w-24 px-4 py-3 rounded-full'
+                >
+                    <Icon
+                        name="car"
+                        color='white'
+                        type='font-awsome'
+                        size={16}
+                    />
+                    <Text className='text-white text-center'>Rides</Text>
+                </TouchableOpacity>
+                <TouchableOpacity className='flex flex-row justify-between w-24 px-4 py-3 rounded-full'>
+                    <Icon
+                        name="car"
+                        color='black'
+                        type='font-awsome'
+                        size={16}
+                    />
+                    <Text className='text-center'>Rides</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
