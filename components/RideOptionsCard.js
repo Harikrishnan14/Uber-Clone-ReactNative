@@ -3,11 +3,16 @@ import React, { useState } from 'react'
 import { Icon } from 'react-native-elements'
 import { useNavigation } from 'expo-router'
 import { Image } from 'react-native'
+import { useSelector } from 'react-redux'
+import { selectTravelTimeInformation } from '@/redux/slices/navSlice'
 
 const RideOptionsCard = () => {
 
     const navigation = useNavigation()
     const [selected, setSelected] = useState(null)
+    const travelTimeInformation = useSelector(selectTravelTimeInformation)
+
+    const SURGE_CHARGE_RATE = 1.5
 
     const data = [
         {
@@ -42,7 +47,7 @@ const RideOptionsCard = () => {
                         type='fontawsome'
                     />
                 </TouchableOpacity>
-                <Text className='text-center py-5 text-lg'>Select a Ride</Text>
+                <Text className='text-center py-5 text-lg'>Select a Ride - {travelTimeInformation?.distance.text}</Text>
             </View>
             <FlatList
                 data={data}
@@ -62,14 +67,19 @@ const RideOptionsCard = () => {
                         />
                         <View className='-mr-6'>
                             <Text className='text-xl font-semibold'>{title}</Text>
-                            <Text>Travel Time...</Text>
+                            <Text>{travelTimeInformation?.duration.text} Travel Time</Text>
                         </View>
-                        <Text className='text-xl'>£99</Text>
+                        <Text className='text-xl'>£99
+                            {new Intl.NumberFormat('en-gb', {
+                                style: 'currency',
+                                currency: 'GBP'
+                            }).format((travelTimeInformation?.duration.value * SURGE_CHARGE_RATE * multiplier) / 100)}
+                        </Text>
                     </TouchableOpacity>
                 )}
             />
 
-            <View>
+            <View className='mt-auto border-t border-gray-200'>
                 <TouchableOpacity
                     className={`bg-black py-3 m-3 ${!selected && 'bg-gray-300'}`}
                     disabled={!selected}

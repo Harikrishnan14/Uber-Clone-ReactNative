@@ -1,14 +1,15 @@
-import { selectDestination, selectOrigin } from '@/redux/slices/navSlice';
+import { selectDestination, selectOrigin, setTravelTimeInformation } from '@/redux/slices/navSlice';
 import React, { useEffect, useRef } from 'react';
 import { StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MapViewDirections from 'react-native-maps-directions'
 
 const MapViewComponent = () => {
 
     const origin = useSelector(selectOrigin)
     const destination = useSelector(selectDestination)
+    const dispatch = useDispatch()
 
     const GOOGLE_MAPS_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY
 
@@ -21,6 +22,20 @@ const MapViewComponent = () => {
             edgePadding: { top: 50, right: 50, bottom: 50, left: 50 }
         })
     }, [origin, destination])
+
+    useEffect(() => {
+        if (!origin || !destination) return;
+
+        const getTravelTime = async () => {
+            fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin.description}&destination=${destination.description}&key=${GOOGLE_MAPS_API_KEY}`)
+                .then(res => res.json())
+                .then(data => {
+                    dispatch(setTravelTimeInformation(data.rows[0].elements[0]))
+                })
+        }
+
+        getTravelTime()
+    }, [origin, destination, GOOGLE_MAPS_API_KEY])
 
     return (
         <MapView
